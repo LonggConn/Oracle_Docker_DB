@@ -7,18 +7,3 @@ services:
       - ORACLE_PWD=top_secret
     ports:
       - 1521:1521
-    command:
-      - bash
-      - -c
-      - |
-        # create backup dir
-        cd /opt/oracle/oradata
-        mkdir -p recovery_area
-        #
-        echo "install logminer"
-        curl https://raw.githubusercontent.com/LonggConn/CDC_Debezium_Oracle/main/01_logminer-setup.sh | sh
-        #
-        echo "create an example db"
-        curl https://raw.githubusercontent.com/LonggConn/CDC_Debezium_Oracle/main/inventory.sql | sqlplus debezium/dbz@//localhost:1521/orclpdb1
-        #
-        sleep infinity
